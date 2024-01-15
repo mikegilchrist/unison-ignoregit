@@ -11,20 +11,20 @@ else:
     long_description = ""
 
 setup(
-    name="unison-gitignore",
+    name="unison-ignoregit",
     install_requires=["pathspec==0.10.3"],
     use_scm_version=True,
     setup_requires=["setuptools_scm"],
-    description="A unison wrapper to integrate with .gitignore",
-    long_description=long_description,
+    description="A unison wrapper to integrate with git ls-files output.",
+    long_description="A wrapper for the file synchronization program `unison` which excludes anyfile that is git software related (e.g. .git/) or controlled by git.  Wrapper based on [unison-ignoregit](https://github.com/lime-green/unison-gitignore)" 
     long_description_content_type="text/markdown",
-    author="Josh DM",
-    url="https://github.com/lime-green/unison-gitignore",
+    author="Mike Gilchrist",
+    url="https://github.com/mikegilchrist/unison-ignoregit",
     package_dir={"": "src"},
     packages=find_packages(where="src"),
     entry_points={
         "console_scripts": [
-            "unison-gitignore = unison_gitignore.__main__:main",
+            "unison-ignoregit = unison_ignoregit.__main__:main",
         ],
     },
     classifiers=[
@@ -43,5 +43,5 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules"
     ],
     license="MIT",
-    keywords=["unison", "gitignore"],
+    keywords=["unison", "ignoregit"],
 )
