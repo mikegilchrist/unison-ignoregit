@@ -2,9 +2,9 @@ import pathspec
 import re
 
 
-class GitIgnoreToUnisonIgnore:
+class GitLsFilesToUnisonIgnore:
     """
-    Class for converting a .ignoregit file to unison sync ignore patterns
+    Class for converting output from git ls-file to unison sync ignore paths
 
     The anchor path is the ignoregit directory path relative to either:
         - a path, supplied via the "-path" option

@@ -1,7 +1,7 @@
 import os
 import sys
 
-from .parser import GitIgnoreToUnisonIgnore
+from .parser import GitLsFilesToUnisonIgnore
 from .util import (
     build_cmd,
     collect_paths_from_cmd,
@@ -31,12 +31,12 @@ def main(cmd=None):
                 if ignoregit_anchor == ".":
                     ignoregit_anchor = ""
 
-                parser = GitIgnoreToUnisonIgnore(ignoregit_anchor)
+                parser = GitLsFilesToUnisonIgnore(ignoregit_anchor)
                 with open(ignoregit_path, "r") as fh:
                     unison_ignores.extend(parser.parse_ignoregit(fh))
 
         logger.info(
-            f"Adding {len(unison_ignores)} ignore patterns based on .ignoregit contents"
+            f"Adding {len(unison_ignores)} ignore patterns based on `git ls-files` results"
         )
         cmd_new = build_cmd(cmd_args, unison_ignores)
         run_cmd(cmd_new)
