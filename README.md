@@ -1,27 +1,27 @@
 ## Unison Gitignore
-[![PyPI version](https://badge.fury.io/py/unison-gitignore.svg)](https://badge.fury.io/py/unison-gitignore)
+[![PyPI version](https://badge.fury.io/py/unison-ignoregit.svg)](https://badge.fury.io/py/unison-ignoregit)
 
-A gitignore-aware wrapper around [Unison](https://github.com/bcpierce00/unison)
+A ignoregit-aware wrapper around [Unison](https://github.com/bcpierce00/unison)
 
-`unison-gitignore` will walk the local root and any supplied paths finding gitignore files and then call
+`unison-ignoregit` will walk the local root and any supplied paths finding ignoregit files and then call
 `unison` with the appropriate unison ignore patterns
 
 ## Usage
 First install it:
 ```bash
-pip install unison-gitignore
+pip install unison-ignoregit
 ```
 
 Then use:
 ```bash
-unison-gitignore /home/john_doe/local_root ssh://remote_root/ -path data
+unison-ignoregit /home/john_doe/local_root ssh://remote_root/ -path data
 ```
 It accepts the exact same arguments as `unison`
 
 ## Caveats
 - Will not add patterns when using two local roots:
 
-    Unison does the match without the root attached, so a .gitignore file
+    Unison does the match without the root attached, so a .ignoregit file
     in either root would apply to both local roots
 - Will not add patterns when profile usage method is used
 - Does not handle `!pattern` in the same way as git does:

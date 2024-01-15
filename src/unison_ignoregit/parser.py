@@ -4,9 +4,9 @@ import re
 
 class GitIgnoreToUnisonIgnore:
     """
-    Class for converting a .gitignore file to unison sync ignore patterns
+    Class for converting a .ignoregit file to unison sync ignore patterns
 
-    The anchor path is the gitignore directory path relative to either:
+    The anchor path is the ignoregit directory path relative to either:
         - a path, supplied via the "-path" option
         - the local root, when no "-path" is supplied
     """
@@ -18,8 +18,8 @@ class GitIgnoreToUnisonIgnore:
         if self.anchor_path.startswith("/"):
             self.anchor_path = self.anchor_path[1:]
 
-    def parse_gitignore(self, gitignore):
-        spec = pathspec.PathSpec.from_lines(LazyCompiledGitWildMatch, gitignore)
+    def parse_ignoregit(self, ignoregit):
+        spec = pathspec.PathSpec.from_lines(LazyCompiledGitWildMatch, ignoregit)
         return [
             UnisonPathIgnore.from_pattern(self.anchor_path, pattern)
             for pattern in spec.patterns

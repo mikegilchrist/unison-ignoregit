@@ -5,7 +5,7 @@ from .parser import GitIgnoreToUnisonIgnore
 from .util import (
     build_cmd,
     collect_paths_from_cmd,
-    collect_gitignores_from_path,
+    collect_ignoregits_from_path,
     get_local_root_from_cmd,
     logger,
     run_cmd,
@@ -26,17 +26,17 @@ def main(cmd=None):
         unison_ignores = []
 
         for abs_path, path in collect_paths_from_cmd(cmd_args):
-            for gitignore_dir, gitignore_path in collect_gitignores_from_path(abs_path):
-                gitignore_anchor = os.path.relpath(gitignore_dir, local_root)
-                if gitignore_anchor == ".":
-                    gitignore_anchor = ""
+            for ignoregit_dir, ignoregit_path in collect_ignoregits_from_path(abs_path):
+                ignoregit_anchor = os.path.relpath(ignoregit_dir, local_root)
+                if ignoregit_anchor == ".":
+                    ignoregit_anchor = ""
 
-                parser = GitIgnoreToUnisonIgnore(gitignore_anchor)
-                with open(gitignore_path, "r") as fh:
-                    unison_ignores.extend(parser.parse_gitignore(fh))
+                parser = GitIgnoreToUnisonIgnore(ignoregit_anchor)
+                with open(ignoregit_path, "r") as fh:
+                    unison_ignores.extend(parser.parse_ignoregit(fh))
 
         logger.info(
-            f"Adding {len(unison_ignores)} ignore patterns based on .gitignore contents"
+            f"Adding {len(unison_ignores)} ignore patterns based on .ignoregit contents"
         )
         cmd_new = build_cmd(cmd_args, unison_ignores)
         run_cmd(cmd_new)

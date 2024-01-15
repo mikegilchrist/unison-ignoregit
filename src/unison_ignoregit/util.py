@@ -3,14 +3,14 @@ import os
 
 
 log_level = os.environ.get("UNISON_GITIGNORE_LOG_LEVEL", "WARN")
-logger = logging.getLogger("unison_gitignore")
+logger = logging.getLogger("unison_ignoregit")
 logger.setLevel(getattr(logging, log_level))
 logFormatter = logging.Formatter(fmt="%(name)s :: %(levelname)-8s :: %(message)s")
 handler = logging.StreamHandler()
 handler.setFormatter(logFormatter)
 logger.addHandler(handler)
 
-GIT_IGNORE = ".gitignore"
+GIT_IGNORE = ".ignoregit"
 
 
 def build_cmd(cmd, unison_ignores):
@@ -56,7 +56,7 @@ def should_parse_cmd(cmd):
     if cmd[1].startswith("-"):
         # In the case of running using a profile
         logger.warning(
-            "No .gitignore patterns will be added since a unison profile was given"
+            "No .ignoregit patterns will be added since a unison profile was given"
         )
         return False
 
@@ -66,14 +66,14 @@ def should_parse_cmd(cmd):
         # and not the root, we can't add ignore rules when two local
         # paths are being synced, since they would match against both roots
         logger.warning(
-            "No .gitignore patterns will be added since no remote roots were given"
+            "No .ignoregit patterns will be added since no remote roots were given"
         )
         return False
 
     return True
 
 
-def collect_gitignores_from_path(path):
+def collect_ignoregits_from_path(path):
     for root, _, files in os.walk(path):
         if GIT_IGNORE in files:
             yield root, os.path.join(root, GIT_IGNORE)
